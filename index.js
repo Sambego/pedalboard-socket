@@ -1,20 +1,11 @@
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const cors = require('cors')
 
 const PORT = 1337;
 
-const allowCrossDomain = (req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-    next();
-};
-
-app.configure(() => {
-    app.use(allowCrossDomain);
-});
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Pedalboard!')
