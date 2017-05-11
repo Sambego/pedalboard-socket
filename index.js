@@ -1,6 +1,7 @@
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http, {origins: '*:*', secure: true});
+const cors = require('cors');
 
 const PORT = 1337;
 
@@ -8,9 +9,8 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept-Type');
     res.header('Access-Control-Allow-Credentials', 'true');
-
     next();
-});
+})
 
 app.get('/', (req, res) => {
     res.send('Pedalboard!')
@@ -61,4 +61,3 @@ io.on('connection', socket => {
 http.listen(PORT, () => {
     console.log(`listening on *:${PORT}`);
 });
-56,1          12%                                                            63,1          Bot
